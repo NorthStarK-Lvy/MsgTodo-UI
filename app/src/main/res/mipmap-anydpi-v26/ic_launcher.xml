@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    鑷€傚簲鍥炬爣锛?      background = 娣辫摑娓愬彉锛坉rawable锛岃 ic_demo_background.xml锛?      foreground = 鐧借壊瀵硅瘽姘旀场 + 姘旀场鍐呮寲鍑轰竴涓嬀锛?娑堟伅 鈫?寰呭姙"锛?      monochrome = 涓婚鍥炬爣锛圓ndroid 13+ 闀挎寜 鈫?澹佺焊涓庢牱寮?鈫?涓婚鍥炬爣锛?    鈽?monochrome 蹇呴』鐢ㄥ悓涓€涓墠鏅?drawable 鈥斺€?鍕炬槸鐢ㄨ儗鏅壊"鎸?鍑烘潵鐨?      锛堣鍓嶆櫙鏂囦欢閲岀殑娉ㄩ噴锛夛紝鎵€浠ュ崟鑹叉ā寮忎笅鍕句緷鐒舵竻鏅帮紝涓嶄細鍜屾皵娉＄硦鎴愪竴鐗囥€?-->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <background android:drawable="@drawable/ic_demo_background" />
+    <foreground android:drawable="@drawable/ic_demo_foreground" />
+    <monochrome android:drawable="@drawable/ic_demo_foreground" />
+</adaptive-icon>
+

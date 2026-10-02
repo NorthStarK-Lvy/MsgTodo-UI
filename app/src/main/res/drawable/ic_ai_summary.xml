@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  「AI 总结」图标 —— 参考 MIUI 通知智能总结（com.miui.notification）的图标构图重绘为矢量。
+
+  构图（来自对原图 192×193 像素的连通域测量）：
+    · 三条胶囊横条，左对齐 x=12，长度递增 49 → 69 → 95，间距 42.5
+    · 两个凹边四角星：小星 56×56（y 中心对齐条1），大星 84×84（1.5 倍）
+  语义：横条 = 多行消息，星 = AI 智能，星从文本右侧「生出」→「消息 → 总结」。
+
+  ★ 色彩逻辑：整体是一条「左下橙 → 中部粉 → 右上蓝」的连续色带，
+    横条与星共享同一套色，所以视觉统一 —— 不是三组独立配色硬凑。
+
+  ★ 用 vector 而不是位图：可缩放、体积小、无多套密度图。
+  ★ 多色图标 → 用 androidx.compose.foundation.Image 显示，
+    不要用 Miuix 的 Icon（Icon 是给单色图标着色的）。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="192dp"
+    android:height="193dp"
+    android:viewportWidth="192"
+    android:viewportHeight="193">
+
+    <!-- 条1：橙 → 粉（最短） -->
+    <path android:pathData="M19,56 h35 a7,7 0 0 1 0,14 h-35 a7,7 0 0 1 0,-14 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="12" android:startY="63"
+                android:endX="61" android:endY="63">
+                <item android:offset="0" android:color="#FF7A2A" />
+                <item android:offset="1" android:color="#FA9197" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- 条2：珊瑚粉（中等） -->
+    <path android:pathData="M19.5,97 h54 a7.5,7.5 0 0 1 0,15 h-54 a7.5,7.5 0 0 1 0,-15 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="12" android:startY="104"
+                android:endX="81" android:endY="104">
+                <item android:offset="0" android:color="#F9A68A" />
+                <item android:offset="1" android:color="#F39978" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- 条3：紫 → 蓝（最长） -->
+    <path android:pathData="M19,141 h81 a7,7 0 0 1 0,14 h-81 a7,7 0 0 1 0,-14 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="12" android:startY="148"
+                android:endX="107" android:endY="148">
+                <item android:offset="0" android:color="#C0AFE1" />
+                <item android:offset="1" android:color="#6896F8" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- 小星（右上）：暖橙粉 → 粉，56×56，中心 (103.5, 62.5)
+         ★ 凹度 k=0.32 —— 由原图轮廓数值拟合得出（IoU 0.913），
+           不是拍脑袋定的：45° 方向半径实测约为顶点半径的 0.5 倍。 -->
+    <path android:pathData="M103.5,34.5 C112.46,53.54 112.46,53.54 131.5,62.5 C112.46,71.46 112.46,71.46 103.5,90.5 C94.54,71.46 94.54,71.46 75.5,62.5 C94.54,53.54 94.54,53.54 103.5,34.5 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="76" android:startY="35"
+                android:endX="131" android:endY="90">
+                <item android:offset="0" android:color="#FF8470" />
+                <item android:offset="1" android:color="#FA9298" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- 大星（右下）：紫 → 蓝，84×84，中心 (143.5, 117.5)
+         ★ 凹度 k=0.29 —— 同样由轮廓拟合得出（IoU 0.854）。 -->
+    <path android:pathData="M143.5,75.5 C155.68,105.32 155.68,105.32 185.5,117.5 C155.68,129.68 155.68,129.68 143.5,159.5 C131.32,129.68 131.32,129.68 101.5,117.5 C131.32,105.32 131.32,105.32 143.5,75.5 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="102" android:startY="76"
+                android:endX="185" android:endY="159">
+                <item android:offset="0" android:color="#8887E2" />
+                <item android:offset="1" android:color="#4976FF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+</vector>

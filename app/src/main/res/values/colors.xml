@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 首帧窗口底色（浅色）。与 Miuix 默认浅色 surface 一致（#F7F7F7），
+         否则启动时会闪一下不匹配的颜色。深色值在 values-night。 -->
+    <color name="window_background">#FFF7F7F7</color>
+</resources>

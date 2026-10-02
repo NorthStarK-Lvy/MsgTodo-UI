@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    图标背景：从上到下的深蓝渐变。
+
+    ★ 为什么用 drawable 而不是纯色：
+      纯色 (#FF3482FF) 是一块"平"的蓝，没有任何层次；
+      加一个从 #4A93FF 到 #2874E8 的纵向渐变，
+      图标在桌面上才有"凸出来"的体积感 —— HyperOS 的图标大多带这种微渐变。
+
+    ★ 为什么引用 ic_launcher_background 而不是直接写色值：
+      launcher XML（mipmap-anydpi-v26/ic_launcher.xml）引用的是这个资源名，
+      改这里一处即可，两处不会改漏。
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:startColor="#FF4A93FF"
+                android:endColor="#FF2874E8"
+                android:type="linear" />
+        </shape>
+    </item>
+</layer-list>

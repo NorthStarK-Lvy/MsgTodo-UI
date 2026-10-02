@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  「通知被 AI 总结」示意图 —— 参考 MIUI 通知智能总结（com.miui.notification）
+  的 ai_notification 插图重绘为矢量。
+
+  构图：一台设备里立着两张通知卡片，每张卡片 = 左侧图标占位方块
+        + 三条横条（第 2 条前带 AI 小标记）。
+
+  ★ 几何全部由原图 1104×645 像素**逐块测量**得出（连通域 + 逐行扫描 + 颜色采样），
+    不是目测：设备框外圆角 82 / 描边 15、卡片圆角 20、胶囊圆角 = 高/2。
+  ★ 设备框**底边是开口的**（左右竖边延伸到底，中间没有横边）—— 这是"设备立在地面上"
+    的画法。所以填充与描边拆成两个 path：填充闭合（Z），描边**不能闭合**
+    （闭合的话底部会多出一条横边，与原图不符）。
+  ★ 渐变是**非线性**的（R 通道 203→220→249，加速度变化），所以用**多色标**
+    而不是两端色标 —— 两色标会让中段偏色。
+  ★ 用 vector 而非位图：一套即可，不必出 mdpi/hdpi/xhdpi 多套图。
+  ★ 多色渐变图 → 用 androidx.compose.foundation.Image 显示，
+    不要用 Miuix 的 Icon（Icon 会给单色图标着色，渐变会被染平）。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="276dp"
+    android:height="161.25dp"
+    android:viewportWidth="1104"
+    android:viewportHeight="645">
+
+    <!-- 设备框填充（顶部圆角、底部直角；Z 隐式闭合底边）-->
+    <path
+        android:pathData="M277.5,584 V148 A74.5,74.5 0 0 1 352,73.5 H754 A74.5,74.5 0 0 1 828.5,148 V584 Z"
+        android:fillColor="#FFF4F6FA" />
+
+    <!-- 设备框描边（同一轮廓但**不闭合**）-->
+    <path
+        android:pathData="M277.5,584 V148 A74.5,74.5 0 0 1 352,73.5 H754 A74.5,74.5 0 0 1 828.5,148 V584"
+        android:strokeColor="#FFB6BBD5"
+        android:strokeWidth="15" />
+
+    <!-- 卡片（水平渐变：蓝紫 → 粉；多色标拟合原图非线性渐变）-->
+    <path android:pathData="M344,214 h416 a20,20 0 0 1 20,20 v90 a20,20 0 0 1 -20,20 h-416 a20,20 0 0 1 -20,-20 v-90 a20,20 0 0 1 20,-20 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="324" android:startY="0" android:endX="780" android:endY="0">
+            <item android:offset="0" android:color="#FFCBDAFF" />
+            <item android:offset="0.5" android:color="#FFDCDDF6" />
+            <item android:offset="1" android:color="#FFF9DFE6" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- 图标占位方块 -->
+    <path android:pathData="M357,234 h17 a12,12 0 0 1 12,12 v17 a12,12 0 0 1 -12,12 h-17 a12,12 0 0 1 -12,-12 v-17 a12,12 0 0 1 12,-12 Z" android:fillColor="#FFE0F0FD" />
+    <!-- 条1（短） -->
+    <path android:pathData="M417.5,233 h89 a11.5,11.5 0 0 1 0,23 h-89 a11.5,11.5 0 0 1 0,-23 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="406" android:startY="0" android:endX="518" android:endY="0">
+            <item android:offset="0" android:color="#FF83A2FC" />
+            <item android:offset="1" android:color="#FF9AA4F5" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- 条2（中） -->
+    <path android:pathData="M452,268 h295 a11,11 0 0 1 0,22 h-295 a11,11 0 0 1 0,-22 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="441" android:startY="0" android:endX="758" android:endY="0">
+            <item android:offset="0" android:color="#FFACBAFE" />
+            <item android:offset="0.4" android:color="#FFC4C0E8" />
+            <item android:offset="0.8" android:color="#FFE9C2D1" />
+            <item android:offset="1" android:color="#FFF4C4C9" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- 条3（长） -->
+    <path android:pathData="M417,302 h331 a11,11 0 0 1 0,22 h-331 a11,11 0 0 1 0,-22 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="406" android:startY="0" android:endX="759" android:endY="0">
+            <item android:offset="0" android:color="#FFA5B9FF" />
+            <item android:offset="0.28" android:color="#FFB5BEF2" />
+            <item android:offset="0.56" android:color="#FFD3C1DE" />
+            <item android:offset="0.85" android:color="#FFEDC3CA" />
+            <item android:offset="1" android:color="#FFF7C4C8" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- AI 小标记：三条递增短线 + 两颗星（与 ic_ai_summary 同一套设计语言）-->
+    <path android:pathData="M408.5,271 h5 a1.5,1.5 0 0 1 0,3 h-5 a1.5,1.5 0 0 1 0,-3 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M408.5,278 h7 a1.5,1.5 0 0 1 0,3 h-7 a1.5,1.5 0 0 1 0,-3 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M408.5,285 h13 a1.5,1.5 0 0 1 0,3 h-13 a1.5,1.5 0 0 1 0,-3 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M421.5,267 C423.15,270.85 423.15,270.85 427,272.5 C423.15,274.15 423.15,274.15 421.5,278 C419.85,274.15 419.85,274.15 416,272.5 C419.85,270.85 419.85,270.85 421.5,267 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M427.5,274 C429.6,278.9 429.6,278.9 434.5,281 C429.6,283.1 429.6,283.1 427.5,288 C425.4,283.1 425.4,283.1 420.5,281 C425.4,278.9 425.4,278.9 427.5,274 Z" android:fillColor="#FF93A9FA" />
+
+    <!-- 卡片（水平渐变：蓝紫 → 粉；多色标拟合原图非线性渐变）-->
+    <path android:pathData="M344,366 h416 a20,20 0 0 1 20,20 v90 a20,20 0 0 1 -20,20 h-416 a20,20 0 0 1 -20,-20 v-90 a20,20 0 0 1 20,-20 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="324" android:startY="0" android:endX="780" android:endY="0">
+            <item android:offset="0" android:color="#FFCBDAFF" />
+            <item android:offset="0.5" android:color="#FFDCDDF6" />
+            <item android:offset="1" android:color="#FFF9DFE6" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- 图标占位方块 -->
+    <path android:pathData="M357,386 h17 a12,12 0 0 1 12,12 v17 a12,12 0 0 1 -12,12 h-17 a12,12 0 0 1 -12,-12 v-17 a12,12 0 0 1 12,-12 Z" android:fillColor="#FFE0F0FD" />
+    <!-- 条1（短） -->
+    <path android:pathData="M417.5,385 h89 a11.5,11.5 0 0 1 0,23 h-89 a11.5,11.5 0 0 1 0,-23 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="406" android:startY="0" android:endX="518" android:endY="0">
+            <item android:offset="0" android:color="#FF83A2FC" />
+            <item android:offset="1" android:color="#FF9AA4F5" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- 条2（中） -->
+    <path android:pathData="M452,420 h295 a11,11 0 0 1 0,22 h-295 a11,11 0 0 1 0,-22 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="441" android:startY="0" android:endX="758" android:endY="0">
+            <item android:offset="0" android:color="#FFACBAFE" />
+            <item android:offset="0.4" android:color="#FFC4C0E8" />
+            <item android:offset="0.8" android:color="#FFE9C2D1" />
+            <item android:offset="1" android:color="#FFF4C4C9" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- 条3（长） -->
+    <path android:pathData="M417,454 h331 a11,11 0 0 1 0,22 h-331 a11,11 0 0 1 0,-22 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="406" android:startY="0" android:endX="759" android:endY="0">
+            <item android:offset="0" android:color="#FFA5B9FF" />
+            <item android:offset="0.28" android:color="#FFB5BEF2" />
+            <item android:offset="0.56" android:color="#FFD3C1DE" />
+            <item android:offset="0.85" android:color="#FFEDC3CA" />
+            <item android:offset="1" android:color="#FFF7C4C8" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- AI 小标记：三条递增短线 + 两颗星（与 ic_ai_summary 同一套设计语言）-->
+    <path android:pathData="M408.5,423 h5 a1.5,1.5 0 0 1 0,3 h-5 a1.5,1.5 0 0 1 0,-3 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M408.5,430 h7 a1.5,1.5 0 0 1 0,3 h-7 a1.5,1.5 0 0 1 0,-3 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M408.5,437 h13 a1.5,1.5 0 0 1 0,3 h-13 a1.5,1.5 0 0 1 0,-3 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M421.5,419 C423.15,422.85 423.15,422.85 427,424.5 C423.15,426.15 423.15,426.15 421.5,430 C419.85,426.15 419.85,426.15 416,424.5 C419.85,422.85 419.85,422.85 421.5,419 Z" android:fillColor="#FF93A9FA" />
+    <path android:pathData="M427.5,426 C429.6,430.9 429.6,430.9 434.5,433 C429.6,435.1 429.6,435.1 427.5,440 C425.4,435.1 425.4,435.1 420.5,433 C425.4,430.9 425.4,430.9 427.5,426 Z" android:fillColor="#FF93A9FA" />
+
+    <!-- 地面线（画在最上层，压住设备底端）-->
+    <path android:pathData="M224.5,586 h655 a7.5,7.5 0 0 1 0,15 h-655 a7.5,7.5 0 0 1 0,-15 Z" android:fillColor="#FFDDDEE4" />
+
+</vector>

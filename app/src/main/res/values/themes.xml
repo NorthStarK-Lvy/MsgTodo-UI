@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 首帧之前的窗口底色。真正的配色由 AppTheme（Miuix）在 Compose 里接管。 -->
+    <style name="Theme.MsgTodoUI" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+</resources>
